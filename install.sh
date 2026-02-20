@@ -16,7 +16,12 @@ else
 fi
 
 # Make executable and symlink to PATH
-chmod +x "$(dirname "$0")/page"
-sudo ln -sf "$(realpath "$(dirname "$0")/page")" /usr/local/bin/page
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ ! -f "$SCRIPT_DIR/page" ]; then
+    echo "Error: 'page' script not found in $SCRIPT_DIR. Make sure you cloned the full repository." >&2
+    exit 1
+fi
+chmod +x "$SCRIPT_DIR/page"
+sudo ln -sf "$SCRIPT_DIR/page" /usr/local/bin/page
 
 echo "Installed. Usage: page <url>"
