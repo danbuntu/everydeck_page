@@ -5,7 +5,7 @@ set -e
 
 # Install WebKitGTK and Python GObject bindings
 if command -v apt-get &>/dev/null; then
-    sudo apt-get install -y python3 gir1.2-webkit2-4.1 python3-gi
+    sudo apt-get install -y python3 python3-gi gir1.2-gtk-3.0 libgtk-3-0 gir1.2-webkit2-4.1
 elif command -v dnf &>/dev/null; then
     sudo dnf install -y python3 webkit2gtk4.1 python3-gobject
 elif command -v pacman &>/dev/null; then
