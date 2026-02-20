@@ -6,7 +6,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
-from gi.repository import Gtk, WebKit2
+from gi.repository import Gdk, Gtk, WebKit2
 
 
 def main():
@@ -21,6 +21,14 @@ def main():
     win = Gtk.Window()
     win.set_title("Page")
     win.connect("destroy", Gtk.main_quit)
+
+    # fullscreen() alone is ignored by xinit (no WM to process EWMH hints).
+    # Manually size to screen and remove decorations so it works with or without a WM.
+    win.set_decorated(False)
+    monitor = Gdk.Display.get_default().get_primary_monitor()
+    geo = monitor.get_geometry()
+    win.move(geo.x, geo.y)
+    win.set_default_size(geo.width, geo.height)
     win.fullscreen()
 
     webview = WebKit2.WebView()
