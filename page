@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """Page - A minimal fullscreen single-page web browser."""
 
+import os
 import sys
 import gi
+
+# WebKit2's GL compositing layer causes blank rendering on VC4 (Raspberry Pi).
+# Force software compositing before WebKit2 initialises.
+os.environ.setdefault("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
 
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
