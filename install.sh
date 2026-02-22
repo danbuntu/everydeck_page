@@ -25,6 +25,7 @@ if [ ! -f "$SCRIPT_DIR/page" ]; then
     echo "Error: 'page' script not found in $SCRIPT_DIR. Make sure you cloned the full repository." >&2
     exit 1
 fi
+sed -i 's/\r//' "$SCRIPT_DIR/page"
 chmod +x "$SCRIPT_DIR/page"
 sudo ln -sf "$SCRIPT_DIR/page" /usr/local/bin/page
 
