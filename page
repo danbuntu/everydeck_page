@@ -4,6 +4,7 @@
 import sys
 import gi
 
+gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
 from gi.repository import Gdk, Gtk, WebKit2
@@ -26,9 +27,10 @@ def main():
     # Manually size to screen and remove decorations so it works with or without a WM.
     win.set_decorated(False)
     monitor = Gdk.Display.get_default().get_primary_monitor()
-    geo = monitor.get_geometry()
-    win.move(geo.x, geo.y)
-    win.set_default_size(geo.width, geo.height)
+    if monitor is not None:
+        geo = monitor.get_geometry()
+        win.move(geo.x, geo.y)
+        win.set_default_size(geo.width, geo.height)
     win.fullscreen()
 
     webview = WebKit2.WebView()
