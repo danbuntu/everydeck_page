@@ -44,7 +44,7 @@ def main():
     settings = webview.get_settings()
     settings.set_enable_smooth_scrolling(False)
     settings.set_hardware_acceleration_policy(
-        WebKit2.HardwareAccelerationPolicy.NEVER
+        WebKit2.HardwareAccelerationPolicy.ON_DEMAND
     )
 
     webview.load_uri(url)
