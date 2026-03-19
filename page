@@ -9,6 +9,10 @@ import gi
 # Force software compositing before WebKit2 initialises.
 os.environ.setdefault("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
 
+# Pi 3 has no hardware VP9 decoder. Demoting VP9 decoders forces YouTube to
+# serve H.264 instead, which the Pi's VideoCore IV can hardware-decode.
+os.environ.setdefault("GST_PLUGIN_FEATURE_RANK", "vp9dec:NONE,avdec_vp9:NONE")
+
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
