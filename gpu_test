@@ -1,0 +1,1 @@
+GST_DEBUG=v4l2videodec:5 page https://www.youtube.com/watch?v=<id> 2>&1 | grep -i "v4l2\|h264"
